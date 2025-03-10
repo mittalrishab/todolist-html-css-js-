@@ -130,3 +130,183 @@ h1{
 .message{
     display: none;
 }
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .container {
+        width: 70vw;
+    }
+    .todo {
+        width: 65vw;
+    }
+}
+
+@media (max-width: 992px) {
+    h1 {
+        width: 80vw;
+        font-size: 2.5rem;
+    }
+    .container {
+        width: 80vw;
+        height: 12vh;
+    }
+    #task {
+        width: 60vw;
+        font-size: 1.5rem;
+    }
+    #submit {
+        width: 10vw;
+    }
+    .todo {
+        width: 75vw;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start;
+        padding-top: 5vh;
+    }
+    h1 {
+        width: 90vw;
+        font-size: 2rem;
+        margin: 3vh 0;
+    }
+    .container {
+        width: 90vw;
+        height: 10vh;
+        border-radius: 30px;
+    }
+    #task {
+        width: 70vw;
+        height: 6vh;
+        font-size: 1.2rem;
+    }
+    #submit {
+        width: 12vw;
+        height: 6vh;
+        font-size: 2.5rem;
+    }
+    .tasks-container {
+        width: 85vw;
+        height: 60vh;
+    }
+    .todo {
+        width: 80vw;
+        padding: 0 15px;
+    }
+    .content {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.8rem;
+        width: 95vw;
+    }
+    .container {
+        width: 95vw;
+        height: 8vh;
+        border-radius: 20px;
+    }
+    #task {
+        width: 80vw;
+        height: 5vh;
+        font-size: 1rem;
+        padding-left: 10px;
+    }
+    #submit {
+        width: 15vw;
+        height: 5vh;
+        font-size: 2rem;
+    }
+    .tasks-container {
+        width: 95vw;
+        margin-top: 5vh;
+    }
+    .todo {
+        width: 90vw;
+        min-height: 60px;
+        margin: 8px 0;
+        padding: 0 10px;
+    }
+    .complete, .delete {
+        height: 4vh;
+        width: 8vw;
+        margin-right: 10px;
+    }
+    .todo img {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    #task {
+        font-size: 0.9rem;
+    }
+    .content {
+        font-size: 1rem;
+    }
+    .complete, .delete {
+        min-width: 30px;
+        height: 30px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    h1 {
+        width: 70vw;
+        font-size: 2.2rem;
+        margin: 4vh 0;
+    }
+    
+    .container {
+        width: 65vw;
+        height: 13vh;
+        border-radius: 35px;
+    }
+    
+    #task {
+        width: 50vw;
+        font-size: 1.4rem;
+        padding-left: 12px;
+    }
+    
+    #submit {
+        width: 7vw;
+        font-size: 2.8rem;
+    }
+    
+    .tasks-container {
+        width: 75vw;
+        margin-top: 8vh;
+    }
+    
+    .todo {
+        width: 65vw;
+        padding: 0 25px;
+    }
+    
+    .content {
+        font-size: 1.3rem;
+        margin-right: 15px;
+    }
+    
+    .complete, .delete {
+        height: 4.5vh;
+        width: 5.5vw;
+        margin-right: 15px;
+    }
+    
+    .todo img {
+        height: 22px;
+        width: 22px;
+    }
+}
