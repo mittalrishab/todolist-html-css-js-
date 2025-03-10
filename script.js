@@ -3,62 +3,76 @@ let form = document.querySelector('.container');
 let task = document.getElementById('task');
 let taskContainer = document.querySelector('.tasks-container');
 let message = document.querySelector(".message");
-let todo = document.getElementsByClassName('todo');
-//check what is the difference between this and simple todo.getElemets
-if (taskContainer.children.length === 0) {
-    message.style.display = "block";
-}  else {
-    message.style.display = "none";
+
+// Load tasks from localStorage or initialize an empty array
+let taskarray = JSON.parse(localStorage.getItem('tasks')) || [];
+
+// Function to update the visibility of the message
+function updateMessageVisibility() {
+    message.style.display = taskContainer.children.length === 0 ? "block" : "none";
 }
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    
-    if (task.value.trim() === "") {
-        alert("Task cannot be empty!");
-        return;
-    }
-
+// Function to create a task element
+function createTaskElement(text, id) {
     let createdTask = document.createElement('div');
     createdTask.classList.add('todo');
+    createdTask.dataset.id = id;
 
     let taskContent = document.createElement('div');
     taskContent.classList.add('content');
-    taskContent.innerText = task.value;
+    taskContent.textContent = text;
 
     let operations = document.createElement('div');
     operations.classList.add('operations');
 
-    // Add delete button
-
-    //what happens if deletebutton is added outside
+    // Delete button
     let deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete');
-    deleteBtn.innerHTML =`<img src=svgs/delete.svg alt="delete">`;
+    deleteBtn.innerHTML = `<img src="svgs/delete.svg" alt="delete">`;
     deleteBtn.addEventListener("click", () => {
+        // Remove task from array and localStorage
+        taskarray = taskarray.filter(task => task.id !== id);
+        localStorage.setItem('tasks', JSON.stringify(taskarray));
         createdTask.remove();
-        if (taskContainer.children.length === 0) {
-            message.style.display = "block";
-        }        
+        updateMessageVisibility();
     });
 
+    // Complete button
     let completeBtn = document.createElement('button');
     completeBtn.classList.add('complete');
-    completeBtn.innerHTML=`<img src="svgs/complete.svg" alt="complete">`
-    completeBtn.addEventListener("click",()=>{
-        taskContent.style.textDecoration = 'line-through';
+    completeBtn.innerHTML = `<img src="svgs/complete.svg" alt="complete">`;
+    completeBtn.addEventListener("click", () => {
+        taskContent.style.textDecoration = taskContent.style.textDecoration === 'line-through' ? 'none' : 'line-through';
     });
 
-    operations.appendChild(deleteBtn);
-    operations.appendChild(completeBtn);
-    createdTask.appendChild(taskContent);
-    createdTask.appendChild(operations);
-
+    operations.append(deleteBtn, completeBtn);
+    createdTask.append(taskContent, operations);
     taskContainer.appendChild(createdTask);
-    
-    // Hide message
-    message.style.display = "none";
+}
 
-    // Clear input
+// Load existing tasks on page load
+document.addEventListener('DOMContentLoaded', () => {
+    taskarray.forEach(task => {
+        createTaskElement(task.text, task.id);
+    });
+    updateMessageVisibility();
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let taskText = task.value.trim();
+
+    if (!taskText) {
+        alert("Task cannot be empty!");
+        return;
+    }
+
+    // Create a unique ID for the task
+    const taskId = Date.now().toString();
+    taskarray.push({ id: taskId, text: taskText });
+    localStorage.setItem('tasks', JSON.stringify(taskarray));
+
+    createTaskElement(taskText, taskId);
     task.value = "";
+    updateMessageVisibility();
 });
